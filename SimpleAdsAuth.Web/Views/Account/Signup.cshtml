@@ -1,0 +1,23 @@
+﻿<div class="row" style="min-height: 80vh; display:flex; align-items: center;">
+    <div class="col-md-6 offset-md-3 bg-light p-4 rounded shadow">
+        <h1>Sign up!</h1>
+        <form method="post" action="/account/signup">
+            <input type="text" class="form-control" name="name" placeholder="Name..." required />
+            <br />
+            <input type="text" class="form-control" name="email" placeholder="Email" id="email" required/>
+            <br />
+            <div class="input-group input-group-lg">
+                <input type="password" class="form-control rounded-start-4 border-2" id="password" name="password" placeholder="Enter password" required>
+                <button type="button" class="btn btn-outline-secondary rounded-end-4" id="togglePassword">
+                    <i class="bi bi-eye"></i>
+                </button>
+            </div>
+            <br />
+            <button class="btn btn-primary w-100 btn-lg">Sign up!</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+	<script src="/js/password-toggle.js"></script>
+}

@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="SimpleAdsAuth.Data/SimpleAdsAuth.Data.csproj" />
+  <Project Path="SimpleAdsAuth.Web/SimpleAdsAuth.Web.csproj" />
+</Solution>
