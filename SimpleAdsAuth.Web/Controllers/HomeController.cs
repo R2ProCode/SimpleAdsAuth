@@ -19,13 +19,9 @@ namespace SimpleAdsAuth.Web.Controllers
                 SimpleAds = repo.GetAllAds()
             });
         }
-
+        [Authorize]
         public IActionResult NewAd()
         {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Login", "Account");
-            }
             return View();
         }
 
