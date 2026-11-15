@@ -25,7 +25,7 @@ namespace SimpleAdsAuth.Web.Controllers
         {
             var repo = new UserRepository(_connectionString);
             repo.AddUser(user, password);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login");
         }
 
         public IActionResult Login()
@@ -48,6 +48,7 @@ namespace SimpleAdsAuth.Web.Controllers
                 return RedirectToAction("Login");
             }
 
+            //way usually done = store user email in claims
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())

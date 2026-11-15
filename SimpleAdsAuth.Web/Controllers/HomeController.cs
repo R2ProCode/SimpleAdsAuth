@@ -19,16 +19,19 @@ namespace SimpleAdsAuth.Web.Controllers
                 SimpleAds = repo.GetAllAds()
             });
         }
+
         [Authorize]
         public IActionResult NewAd()
         {
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult NewAd(SimpleAd simpleAd)
         {
             var repo = new SimpleAdRepository(_connectionString);
+            simpleAd.UserId = int.Parse(User.Identity.Name);
             repo.AddAd(simpleAd);
             return RedirectToAction("Index");
         }
@@ -38,26 +41,25 @@ namespace SimpleAdsAuth.Web.Controllers
         {
             var repo = new SimpleAdRepository(_connectionString);
 
-            var viewModel = new AccountViewModel();
-            var id = int.Parse(User.Identity.Name);
-            viewModel.SimpleAds = repo.GetAdsForUser(id);
-            if (viewModel.SimpleAds == null)
+            var viewModel = new AccountViewModel
             {
-                return RedirectToAction("Index");
-            }
+                SimpleAds = repo.GetAdsForUser(int.Parse(User.Identity.Name))
+            };
 
             return View(viewModel);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult DeleteAd(int id)
         {
             var repo = new SimpleAdRepository(_connectionString);
+            //can also get id for ad & check if matches instead of getting all ads for user
             if (repo.GetAdIdsForUser(int.Parse(User.Identity.Name)).Contains(id))
             {
                 repo.DeleteAd(id);
             }
-            
+
             return RedirectToAction("Index");
         }
     }

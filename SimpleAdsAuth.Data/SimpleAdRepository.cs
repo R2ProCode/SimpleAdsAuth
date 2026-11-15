@@ -21,9 +21,11 @@ namespace SimpleAdsAuth.Data
         {
             using var connection = new SqlConnection(_connectionString);
             using var command = connection.CreateCommand();
+            //can do join
             command.CommandText = @"SELECT *, 
                                    (SELECT Name FROM Users WHERE Id = sa.UserId) 
-                                    AS UserName FROM SimpleAds sa";
+                                    AS UserName FROM SimpleAds sa
+                                    ORDER BY DateCreated DESC";
             connection.Open();
 
             var simpleAds = new List<SimpleAd>();
@@ -74,7 +76,8 @@ namespace SimpleAdsAuth.Data
             using var command = connection.CreateCommand();
             command.CommandText = @"SELECT *, 
                                    (SELECT Name FROM Users WHERE Id = sa.UserId) 
-                                    AS UserName FROM SimpleAds sa WHERE UserId = @userId";
+                                    AS UserName FROM SimpleAds sa WHERE UserId = @userId
+                                    ORDER BY DateCreated DESC";
             command.Parameters.AddWithValue("@userId", userId);
             connection.Open();
 

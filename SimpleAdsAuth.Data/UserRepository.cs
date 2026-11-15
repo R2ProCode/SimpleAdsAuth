@@ -39,8 +39,7 @@ namespace SimpleAdsAuth.Data
                 return null;
             }
 
-            var hash = user.PasswordHash;
-            if (!BCrypt.Net.BCrypt.Verify(password, hash))
+            if (!BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
             {
                 return null;
             }
